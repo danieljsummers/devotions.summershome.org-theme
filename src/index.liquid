@@ -19,20 +19,7 @@
         <i class="fa fa-calendar" title="Date"></i> {{ post.published_on | date: "dddd, MMMM d, yyyy" }}
         {% if logged_on %} &bull; <a href="{{ post | edit_post_link }}">Edit Post</a>{% endif %}
       </p>
-      {%- assign media = post.metadata | value: "episode_media_file" -%}
-      {%- unless media == "-- episode_media_file not found --"  %}
-        <aside class="podcast">
-          <p class="text-center"><strong>Listen While<br>You Read</strong></p>
-          <audio controls onplaying="awftw.countPlay('{{ media }}')">
-            <source src="https://files.bitbadger.solutions/devotions/{{ media }}">
-          </audio>
-          <p class="text-center">
-            <a class="dl" href="https://pdcst.click/c/awftw/files.bitbadger.solutions/devotions/{{ media }}" download>
-              <i class="fa fa-download" title="Download Audio"></i>
-            </a>
-          </p>
-        </aside>
-      {%- endunless %}
+      {% include_template "_episode" %}
       {{ post.text }}
     </article>
   {% endfor %}

@@ -1,0 +1,14 @@
+﻿{%- if post.episode %}
+  {%- assign media = post.episode.value.media -%}
+  <aside class="podcast">
+    <p class="text-center"><strong>Listen While<br>You Read</strong></p>
+    <audio controls onplaying="awftw.countPlay('{{ media }}')">
+      <source src="https://files.bitbadger.solutions/devotions/{{ media }}">
+    </audio>
+    <p class="text-center">
+      <a class="dl" href="https://pdcst.click/c/awftw/files.bitbadger.solutions/devotions/{{ media }}" download>
+        <i class="fa fa-download" title="Download Audio"></i>
+      </a>
+    </p>
+  </aside>
+{%- endif %}
