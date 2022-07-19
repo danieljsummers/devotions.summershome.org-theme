@@ -42,7 +42,7 @@
     <h4 class="item-heading">Series</h4>
     {%- for series in series_details %}
       {% assign parts = series | split: "," %}
-      {% assign cat = categories | where: "id", parts[0] | first %}
+      {% assign cat = categories | where: "Id", parts[0] | first %}
       <h4 class="text-center">{{ cat.name }}</h4>
       <p class="text-center">
         <a href="{{ parts[2] | relative_link }}"
@@ -61,7 +61,7 @@
     <h4 class="text-center">Old Testament</h4>
     <p class="text-center">
       {%- assign cat_id = ot_books | first -%}
-      {%- assign cat = categories | where: "id", cat_id | first -%}
+      {%- assign cat = categories | where: "Id", cat_id | first -%}
       <a href="{{ cat | category_link }}"
          {%- if cat.description %} title="{{ cat.description.value | escape_once }}"{% endif %}>
         See All
@@ -73,7 +73,7 @@
         {%- if first_time -%}
           {%- assign first_time = false -%}
         {%- else %}
-          {%- assign cat = categories | where: "id", cat_id | first -%}
+          {%- assign cat = categories | where: "Id", cat_id | first -%}
           <li>
             {% if cat.post_count == 0 -%}
               <span{% if cat.description %} title="{{ cat.description.value | escape_once }}"{% endif %}>
@@ -93,7 +93,7 @@
     <h4 class="text-center">New Testament</h4>
     <p class="text-center">
       {%- assign cat_id = nt_books | first -%}
-      {%- assign cat = categories | where: "id", cat_id | first -%}
+      {%- assign cat = categories | where: "Id", cat_id | first -%}
       <a href="{{ cat | category_link }}"
          {%- if cat.description %} title="{{ cat.description.value | escape_once }}"{% endif %}>
         See All
@@ -105,7 +105,7 @@
         {%- if first_time -%}
           {%- assign first_time = false -%}
         {%- else %}
-          {%- assign cat = categories | where: "id", cat_id | first -%}
+          {%- assign cat = categories | where: "Id", cat_id | first -%}
           <li>
             {% if cat.post_count == 0 -%}
               <span{% if cat.description %} title="{{ cat.description.value | escape_once }}"{% endif %}>

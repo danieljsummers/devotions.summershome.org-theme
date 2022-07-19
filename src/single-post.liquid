@@ -45,27 +45,26 @@
         <ul>
           <li>
             {%- assign cat_id = ot_books | first -%}
-            {%- assign cat = categories | where: "id", cat_id | first -%}
+            {%- assign cat = categories | where: "Id", cat_id | first -%}
             <i class="fa fa-book" title="Book" aria-hidden="true"></i>
             <a href="{{ cat | category_link }}"
                {%- if cat.description %} title="{{ cat.description.value | escape_once }}"{% endif %}>
               {{ cat.name }}
             </a>
             <ul>
-              {%- assign first_time = true -%}
               {%- for cat_id in ot_books %}
-                {%- if first_time %}
-                  {%- assign first_time = false -%}
-                {%- elsif post.category_ids contains cat_id %}
-                  {% assign cat = categories | where: "id", cat_id | first %}
-                  <li>
-                    <i class="fa fa-book" title="Book" aria-hidden="true"></i>
-                    <a href="{{ cat | category_link }}"
-                       {%- if cat.description %} title="{{ cat.description.value | escape_once }}"{% endif %}>
-                      {{ cat.name }}
-                    </a>
-                  </li>
-                {%- endif %}
+                {%- unless forloop.first %}
+                  {%- if post.category_ids contains cat_id %}
+                    {%- assign cat = categories | where: "Id", cat_id | first -%}
+                    <li>
+                      <i class="fa fa-book" title="Book" aria-hidden="true"></i>
+                      <a href="{{ cat | category_link }}"
+                         {%- if cat.description %} title="{{ cat.description.value | escape_once }}"{% endif %}>
+                        {{ cat.name }}
+                      </a>
+                    </li>
+                  {% endif %}
+                {%- endunless %}
               {%- endfor %}
             </ul>
           </li>
@@ -75,27 +74,26 @@
         <ul>
           <li>
             {%- assign cat_id = nt_books | first -%}
-            {%- assign cat = categories | where: "id", cat_id | first -%}
+            {%- assign cat = categories | where: "Id", cat_id | first -%}
             <i class="fa fa-book" title="Book" aria-hidden="true"></i>
             <a href="{{ cat | category_link }}"
                {%- if cat.description %} title="{{ cat.description.value | escape_once }}"{% endif %}>
               {{ cat.name }}
             </a>
             <ul>
-              {%- assign first_time = true -%}
               {%- for cat_id in nt_books %}
-                {%- if first_time %}
-                  {%- assign first_time = false -%}
-                {%- elsif post.category_ids contains cat_id %}
-                  {% assign cat = categories | where: "id", cat_id | first %}
-                  <li>
-                    <i class="fa fa-book" title="Book" aria-hidden="true"></i>
-                    <a href="{{ cat | category_link }}"
-                       {%- if cat.description %} title="{{ cat.description.value | escape_once }}"{% endif %}>
-                      {{ cat.name }}
-                    </a>
-                  </li>
-                {%- endif %}
+                {%- unless forloop.first %}
+                  {%- if post.category_ids contains cat_id %}
+                    {%- assign cat = categories | where: "Id", cat_id | first -%}
+                    <li>
+                      <i class="fa fa-book" title="Book" aria-hidden="true"></i>
+                      <a href="{{ cat | category_link }}"
+                         {%- if cat.description %} title="{{ cat.description.value | escape_once }}"{% endif %}>
+                        {{ cat.name }}
+                      </a>
+                    </li>
+                  {%- endif %}
+                {%- endunless %}
               {%- endfor %}
             </ul>
           </li>
@@ -107,7 +105,7 @@
   {%- for series_id in series_ids %}
     {%- if post.category_ids contains series_id -%}
       {%- assign in_series = true -%}
-      {%- assign series_cat = categories | where: "id", series_id | first -%}
+      {%- assign series_cat = categories | where: "Id", series_id | first -%}
     {%- endif -%}
   {%- endfor -%}
   {%- if in_series %}
@@ -131,7 +129,7 @@
       <ul>
         {%- for cat_id in post.category_ids %}
           {% unless ot_books contains cat_id or nt_books contains cat_id or series_ids contains cat_id %}
-            {%- assign cat = categories | where: "id", cat_id | first -%}
+            {%- assign cat = categories | where: "Id", cat_id | first -%}
             <li>
               <i class="fa fa-folder-open-o" title="Category" aria-hidden="true"></i>
               <a href="{{ cat | category_link }}" rel="tag" title="Categorized under {{ cat.name | escape }}">
